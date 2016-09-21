@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafbuilder</title>
+    <link rel="stylesheet" href="modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/graf-styles.css">
+    <script src="modules/jquery/dist/jquery.js"></script>
+    <script src="modules/angular/angular.js"></script>
+    <script src="modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src ="graf-controller/graf-controller.js"></script>
+   <script src ="graf-controller/contr-demo.js"></script>
+</head>
+<body ng-app="angularSVG" ng-controller="GrafController as ctrl">
+<div class="wrap">
+    <div class="header">
+        <h1>Grafbuilder 1.0</h1>
+    </div>
+    <div class="container">
+    <div class="content row">
+        <div class="settings col-xs-3">
+            <h3>Настройки</h3>
+            <ul>
+                <li class="dropdown">
+                    <button id="dLabel" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Источник данных
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li>
+                            <a ng-click="ctrl.selectSource('НацБанк РБ')" href="#">
+                                НацБанк РБ
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="ctrl.selectSource('ЦентрБанк РФ')" href="#">
+                                ЦентрБанк РФ
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Характеристики
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li>
+                            <a ng-click="ctrl.selectIndex('index1')" href="#">
+                                index1
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="ctrl.selectIndex('index2')" href="#">
+                                index2
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Период
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li>
+                            <a ng-click="ctrl.selectTime('oneweek')" href="#">
+                                неделя
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="ctrl.selectTime('onemonth')" href="#">
+                               1 месяц
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="ctrl.selectTime('sixmonth')" href="#">
+                                6 месяцев
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="ctrl.selectTime('oneyear')" href="#">
+                                12 месяцев
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="commands">
+                <button class="btn-success" ng-click="ctrl.buildGraf()" type="button">
+                    <span class="glyphicon glyphicon-ok-sign"></span>
+                    построить
+                </button><br>
+                <button class="btn-info" ng-click="ctrl.addGraf()">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    добавить
+                </button><br>
+                <button class="btn-danger" ng-click="ctrl.del()">
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                    удалить
+                </button>
+            </form>
+        </div>
+        <div class="graphics col-xs-8">
+            <h3>График </h3>
+            <span> index1 / index2</span>
+            <div class="axis-y">axis Y
+                <div class="scale-y">
+                    <ul  class="num-y">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="view-box">
+                <div class="glyphicon glyphicon-chevron-up arrow-top"></div>
+                <div class="glyphicon glyphicon-chevron-right arrow-right"></div>
+
+            </div>
+            <div class="axix-x">
+                axis Y
+                <div class="scale-x">
+                    <ul>
+                        <li class="num-x">1</li>
+                        <li class="num-x">2</li>
+                        <li class="num-x">3</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        </div>
+    </div>
+        <!--
+        <div class="row text-center panel">
+           <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#gfafs1" aria-controls="gfafs1" role="tab" data-toggle="tab">Grafs 1</a></li>
+                <li role="presentation"><a href="#diagr" aria-controls="diagr" role="tab" data-toggle="tab">Diagrams</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="gfafs1">
+                    <svg width="350px" height="350px" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="0,0 50,0 150,100 250,100 300,150 450,150 550,100" stroke-width="1" stroke="rgb(0,0,0)"/>
+                    </svg>
+                    <div ng-app="svgCharts" ng-controller="DemoController as demo">
+                        <line-chart data="demo.data" data-x-field="x" data-y-field="y"></line-chart>
+
+
+                                                <script type="text/ng-template" id=ne-chart.html">
+                                                    <!--<svg width="300" height="200" vbox="{{lineChart.viewBox}}" stroke="black" preserveAspectRatio="none meet">
+                                                        <line
+                                                                ng-attr-x1="0"
+                                                                ng-attr-y1="{{lineChart.minY - 5}}"
+                                                                ng-attr-x2="0"
+                                                                ng-attr-y2="{{lineChart.maxY + 5}}"
+                                                                stroke="black"/>
+                                                        <line
+                                                                ng-attr-x1="{{lineChart.minX - 5}}"
+                                                                ng-attr-y1="{{lineChart.maxY}}"
+                                                                ng-attr-x2="{{lineChart.maxX + 5}}"
+                                                                ng-attr-y2="{{lineChart.maxY}}"
+                                                                stroke="black"/>
+                                                        <line ng-repeat="p in lineChart.plotData.slice(0, -1)"
+                                                              ng-attr-x1="{{p.x}}"
+                                                              ng-attr-y1="{{lineChart.maxY - p.y}}"
+                                                              ng-attr-x2="{{lineChart.plotData[$index + 1].x}}"
+                                                              ng-attr-y2="{{lineChart.maxY - lineChart.plotData[$index + 1].y}}"
+                                                              stroke="red"/>
+                                                    </svg>
+                        </script>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="diagr" ng-controller="MainCtrl">
+                    <svg ng-attr-height="{{graph.height}}" ng-attr-width="{{graph.width}}">
+                        <path class="line" ng-attr-d="{{line(points)}}"></path>
+                    </svg>
+                    <svg width="100%" height="100%" viewBox="0 0 400 400"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <path d="M 100 100 L 300 100 L 200 300 z"
+                              fill="orange" stroke="black" stroke-width="3" />
+                    </svg>
+
+                </div>
+            </div>
+            </div>
+         </div>
+
+        <span>Statistic</span>
+        <area shape="poly" coords="100, 20, 150, 70, 50, 70" />-->
+
+    <div class="footer">
+       &#169; Natallia D.  </span><span class="glyphicon glyphicon-envelope"></span> cheneutral@gmail.com
+    </div>
+</div>
+</body>
+</html>
