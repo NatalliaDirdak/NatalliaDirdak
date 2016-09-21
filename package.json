@@ -1,0 +1,13 @@
+{
+  "name": "grafbuilder",
+  "version": "0.0.2",
+  "devDependencies": {
+    "bower": "1.7.9",
+    "http-server": "0.9"
+  },
+  "scripts": {
+     "start": "http-server -p8080 -c-1 ./app"
+  },
+  "private": true,
+  "license": "MIT"
+}
